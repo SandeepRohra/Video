@@ -2,14 +2,19 @@ import React from 'react'
 class SearchBar extends React.Component {
   state = { term: '' }
   onInputChange = (event) => {
-    //onchange m jo function pass karte h usme hamesha event hota h function m
-    this.setState({ term: event.target.value }) //And then this.setState ko event.target.value k equal karte h
+    this.setState({ term: event.target.value })
     console.log(event.target.value)
+  }
+  onFormSubmt = (event) => {
+    event.preventDefault() //2) event argument daal kar event.preventDefault function daalte h
+
+    //to Do:MAke sure to call Callback from parrent component
   }
   render() {
     return (
       <div className="search-bar ui segment">
-        <form className="ui form">
+        <form onSubmit={this.onFormSubmt} className="ui form">
+          {/* 1) onSubmit m hamesha ek function dalte h and usme  */}
           <div className="feild">
             <label>Video Search:- </label>
             <input
