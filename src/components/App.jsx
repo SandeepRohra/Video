@@ -1,26 +1,27 @@
 import React from 'react'
 import SearchBar from './SearchBar'
 import youtube from '../Apis/youtube'
+import VideoList from './Videolist'
 
 class App extends React.Component {
-  state = { videos: [] } // step 1 state initalise kiye usme ek object banaye
-  //step2 usme ek key videos banye and usko empty string kar diye
+  state = { videos: [] }
+
   onTermSubmit = async (term) => {
-    // step3 then async await activate kiye
     const response = await youtube.get(`search`, {
-      //step4 youtube.get ko ek const m store kiye and usko response name diye
       params: {
         q: term,
       },
     })
-    this.setState({ videos: response.data.items }) // step 5 fir this.setState karke us response ko state m daal diye
+    this.setState({ videos: response.data.items }) //this is how it contains videos
   }
   render() {
     return (
       <div className="ui container">
-        <SearchBar onSearchSubmit={this.onTermSubmit} />i got
-        {this.state.videos.length} videos
-        {/* step 6 fir utti videos ko utha ke luski length show kar diye */}
+        <SearchBar onSearchSubmit={this.onTermSubmit} />
+        {/* Step 1 created a videoList component exported it imported it here */}
+        {/* and passed a prop of videos and make it equal to this.state.videos  which contains videos*/}
+        {/* then go to Videolist.jsx */}
+        <VideoList videos={this.state.videos} />
       </div>
     )
   }
