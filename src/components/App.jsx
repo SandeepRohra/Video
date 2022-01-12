@@ -1,24 +1,26 @@
 import React from 'react'
 import SearchBar from './SearchBar'
-import youtube from '../Apis/youtube' //step 8 youtube import kiye
+import youtube from '../Apis/youtube'
 
 class App extends React.Component {
-  onTermSubmit = (term) => {
-    youtube.get(`search`, {
-      // step 9 axios tha vaha to youtube.get kiye usme apan vo string dalle and then
+  state = { videos: [] } // step 1 state initalise kiye usme ek object banaye
+  //step2 usme ek key videos banye and usko empty string kar diye
+  onTermSubmit = async (term) => {
+    // step3 then async await activate kiye
+    const response = await youtube.get(`search`, {
+      //step4 youtube.get ko ek const m store kiye and usko response name diye
       params: {
-        // step 10 params m term dale
-        q: term, // term guide step 1 ye term is functionn ka h onTermSubmit
+        q: term,
       },
     })
+    this.setState({ videos: response.data.items }) // step 5 fir this.setState karke us response ko state m daal diye
   }
   render() {
     return (
       <div className="ui container">
-        <SearchBar onSearchSubmit={this.onTermSubmit} />
-        {/* term guide step 2 y function yaha onSearchSubmit m pass hua 
-        ab sidha Searchbar vale component m jaa
-         */}
+        <SearchBar onSearchSubmit={this.onTermSubmit} />i got
+        {this.state.videos.length} videos
+        {/* step 6 fir utti videos ko utha ke luski length show kar diye */}
       </div>
     )
   }
