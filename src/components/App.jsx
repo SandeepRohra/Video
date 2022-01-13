@@ -4,7 +4,7 @@ import youtube from '../Apis/youtube'
 import VideoList from './Videolist'
 
 class App extends React.Component {
-  state = { videos: [] }
+  state = { videos: [], selectedVideo: null }
 
   onTermSubmit = async (term) => {
     const response = await youtube.get(`search`, {
@@ -14,14 +14,19 @@ class App extends React.Component {
     })
     this.setState({ videos: response.data.items }) //this is how it contains videos
   }
+  onVideoSelect = (video) => {
+    //step 2 usko ek function pass kiye jo ki log karega video  and y video kaha s aai iske liye
+    //Video list m step 3 dekh
+    console.log('from the app', video)
+  }
   render() {
     return (
       <div className="ui container">
         <SearchBar onSearchSubmit={this.onTermSubmit} />
-        {/* Step 1 created a videoList component exported it imported it here */}
-        {/* and passed a prop of videos and make it equal to this.state.videos  which contains videos*/}
-        {/* then go to Videolist.jsx */}
-        <VideoList videos={this.state.videos} />
+        <VideoList
+          videos={this.state.videos}
+          onSelectingVideo={this.onVideoSelect} // step 1) => sabse pahle apan app.js k video list m ek prop banaye
+        />
       </div>
     )
   }

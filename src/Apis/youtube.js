@@ -15,7 +15,7 @@ export default axios.create({
   params: {
     part: 'snippet',
     type: 'video',
-    maxResults: 5,
+    maxResults: 50,
     key: KEY, //y docs m ention nii h but apan ko key dalni hote h perams m,
   },
 })

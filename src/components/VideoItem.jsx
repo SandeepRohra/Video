@@ -1,13 +1,19 @@
 import React from 'react'
-const VideoItem = ({ video }) => {
-  //yaha same apan props s video destrucre kar liye
+import './VideoItem.css'
+const VideoItem = ({ video, onSelectedVideo }) => {
+  // step 5 sabse pahle aopan us videoLIst k prop ko yaha alag kiye
   return (
-    <div>
-      {/* step 1 apan us video ki image property aise desplay kiye video ko log karke uske andar search kare 
-    and then usko yaha display kiye */}
-      <img src={video.snippet.thumbnails.medium.url} />
-      {/* same for title */}
-      {video.snippet.title}
+    <div
+      className="video-item item"
+      onClick={() => {
+        //step 6 => fir apan usme onClick function daale arrow fnction and usme us prop ko is video k equal kardiye
+        onSelectedVideo(video)
+      }}
+    >
+      <img className="ui image" src={video.snippet.thumbnails.medium.url} />
+      <div className="content">
+        <div className="header">{video.snippet.title}</div>
+      </div>
     </div>
   )
 }
